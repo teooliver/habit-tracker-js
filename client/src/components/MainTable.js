@@ -2,18 +2,33 @@ import React, { useEffect } from "react";
 import MainTableStyles from "./styledComponents/MainTableStyles";
 import { oddMonth } from "../utils/constants";
 import { connect } from "react-redux";
-import { getHabits } from "../redux/actions/index";
+import { getHabits, addPoint, removePoint } from "../redux/actions/index";
 
 const MainTable = ({ habits, ...props }) => {
   useEffect(() => {
     props.getHabits();
   }, []);
 
-  const handleDone = (date, day) => {
-    console.log(date);
-    if (date === day) {
-      return <i className="fas fa-circle" style={{ color: " blueviolet" }}></i>;
+  // ###### SANDBOX #######
+  const filtered = habits.map(habit =>
+    habit.events.filter(evt => evt._id !== "11")
+  );
+  console.log(filtered);
+
+  // ###### SANDBOX #######
+
+  const handleDone = (event, day) => {
+    // console.log(date);
+    if (event.day === day) {
+      return (
+        <i
+          onClick={() => props.removePoint(event.id)}
+          className="fas fa-circle"
+          style={{ color: " blueviolet" }}
+        ></i>
+      );
     }
+    return <td onClick={() => props.addPoint(day)}></td>;
   };
 
   return (
@@ -43,7 +58,7 @@ const MainTable = ({ habits, ...props }) => {
                   {oddMonth.map(day => (
                     <td key={day} className="color">
                       {habit.events.map(e => {
-                        return handleDone(e.day, day);
+                        return handleDone(e, day);
                       })}
                     </td>
                   ))}
@@ -63,4 +78,6 @@ const mapStateToProps = ({ habits }) => {
   };
 };
 
-export default connect(mapStateToProps, { getHabits })(MainTable);
+export default connect(mapStateToProps, { getHabits, addPoint, removePoint })(
+  MainTable
+);

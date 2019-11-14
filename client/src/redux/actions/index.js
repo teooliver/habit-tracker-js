@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_HABITS } from "./types";
+import { GET_HABITS, ADD_POINT, REMOVE_POINT } from "./types";
 
 export const getHabits = () => async dispatch => {
   const res = await axios.get("http://localhost:3001/habits");
@@ -10,20 +10,30 @@ export const getHabits = () => async dispatch => {
   });
 };
 
-export const addPoint = () => async dispatch => {
-  const res = await axios.post("http://localhost:3001/habits");
+export const addPoint = day => async dispatch => {
+  const config = {
+    "Content-Type": "application/json"
+  };
+  const res = await axios.post(
+    "http://localhost:3001/habits",
+    { day: day },
+    config
+  );
 
   dispatch({
-    type: GET_HABITS,
+    type: ADD_POINT,
     payload: res.data
   });
 };
 
-export const removePoint = () => async dispatch => {
-  const res = await axios.delete("http://localhost:3001/habits");
+export const removePoint = id => async dispatch => {
+  const config = {
+    "Content-Type": "application/json"
+  };
+  const res = await axios.post("http://localhost:3001/habits", id);
 
   dispatch({
-    type: GET_HABITS,
+    type: REMOVE_POINT,
     payload: res.data
   });
 };

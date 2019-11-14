@@ -1,6 +1,6 @@
 ## Habit-Tracker
 
-MERN stack project using Redux, styled-components.git
+MERN stack project using Redux, styled-components
 
 In the client project directory, you can run:
 
