@@ -1,12 +1,14 @@
 import React from "react";
 import "./App.css";
 import MainTable from "./components/MainTable";
+
 //Redux
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import rootReducer from "./redux/reducers";
+import TempHabitForm from "./components/TempHabitForm";
 
 const initialState = {};
 
@@ -24,6 +26,7 @@ const App = () => {
       <div className="App">
         <h1>Habit Tracker</h1>
         <h2>Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</h2>
+        <TempHabitForm />
         <MainTable />
       </div>
     </Provider>

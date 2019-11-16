@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
   try {
     const habits = await Habit.find();
 
-    if (habit.length === 0) {
+    if (habits.length === 0) {
       return res.status(404).json({ msg: "No habits found" });
     }
 
@@ -20,19 +20,19 @@ router.get("/", async (req, res) => {
   }
 });
 
-// @route     POST api/items
-// @desc      Create item
+// @route     POST api/habits
+// @desc      Create habit
 // @access    Public
-routet.post("/", async (req, res) => {
+router.post("/", async (req, res) => {
   const { name } = req.body;
+  console.log("FROM SERVER", name);
   try {
     let habit = await Habit.findOne({ name });
     if (habit) {
       return res.status(400).json({
-        errors: [{ msg: "Habit already logged" }]
+        errors: "Habit already logged"
       });
     }
-
     habit = new Habit({
       name
     });
@@ -40,8 +40,54 @@ routet.post("/", async (req, res) => {
     await habit.save();
     res.json(habit);
   } catch (error) {
-    console.log(err.message);
+    console.log(error.message);
     res.status(500).send("Server error");
+  }
+});
+
+// @route     DELETE api/habit/:id
+// @desc      Delete habit
+// @access    Public
+router.delete("/:id", async (req, res) => {
+  try {
+    const habit = await Habit.findById(req.params.id);
+
+    if (!habit) {
+      return res.status(404).json({ msg: "Item not found" });
+    }
+    await habit.remove();
+    res.json(habit);
+  } catch (error) {
+    console.error(error.message);
+    if (error.kind === "ObjectId") {
+      return res.status(400).json({ msg: "Item not found" });
+    }
+  }
+});
+
+// @route     POST api/habit/:id/date
+// @desc      Add Point item
+// @access    Public
+router.post("/:id/", async (req, res) => {
+  try {
+    const date = req.body.date;
+
+    let habit = await Habit.findOneAndUpdate({
+      _id: req.params.id,
+      // needs to be unique?
+      // "events.date": {
+      //   $ne: date
+      // },
+      $addToSet: {
+        events: {
+          date
+        }
+      }
+    });
+
+    res.json(habit);
+  } catch (error) {
+    console.log(error);
   }
 });
 

@@ -2,7 +2,12 @@ import React, { useEffect } from "react";
 import MainTableStyles from "./styledComponents/MainTableStyles";
 import { oddMonth } from "../utils/constants";
 import { connect } from "react-redux";
-import { getHabits, addPoint, removePoint } from "../redux/actions/index";
+import {
+  getHabits,
+  addPoint,
+  removePoint,
+  removeHabit
+} from "../redux/actions/index";
 
 const MainTable = ({ habits, ...props }) => {
   useEffect(() => {
@@ -10,26 +15,26 @@ const MainTable = ({ habits, ...props }) => {
   }, []);
 
   // ###### SANDBOX #######
-  const filtered = habits.map(habit =>
-    habit.events.filter(evt => evt._id !== "11")
-  );
-  console.log(filtered);
+  // const filtered = habits.map(habit =>
+  //   habit.events.filter(evt => evt._id !== "11")
+  // );
+  // console.log("Filtered: ", filtered);
 
   // ###### SANDBOX #######
 
-  const handleDone = (event, day) => {
-    // console.log(date);
-    if (event.day === day) {
-      return (
-        <i
-          onClick={() => props.removePoint(event.id)}
-          className="fas fa-circle"
-          style={{ color: " blueviolet" }}
-        ></i>
-      );
-    }
-    return <td onClick={() => props.addPoint(day)}></td>;
-  };
+  // const handleDone = (habit, event, day) => {
+  //   // console.log(habit._id, event, day);
+  //   if (event.day === day) {
+  //     return (
+  //       <i
+  //         onClick={() => props.removePoint(event.id)}
+  //         className="fas fa-circle"
+  //         style={{ color: " blueviolet" }}
+  //       ></i>
+  //     );
+  //   }
+  //   return <div onClick={() => console.log("clicked the div")}></div>;
+  // };
 
   return (
     <>
@@ -47,8 +52,11 @@ const MainTable = ({ habits, ...props }) => {
           {habits.map(habit => {
             return (
               <>
-                <tr>
-                  <td className="habit">
+                <tr key={habit._id}>
+                  <td
+                    className="habit"
+                    onClick={() => props.removeHabit(habit._id)}
+                  >
                     <i
                       className="fas fa-circle"
                       style={{ color: " blueviolet" }}
@@ -57,8 +65,8 @@ const MainTable = ({ habits, ...props }) => {
                   </td>
                   {oddMonth.map(day => (
                     <td key={day} className="color">
-                      {habit.events.map(e => {
-                        return handleDone(e, day);
+                      {habit.events.map(evt => {
+                        return handleDone(habit, evt, day);
                       })}
                     </td>
                   ))}
@@ -78,6 +86,9 @@ const mapStateToProps = ({ habits }) => {
   };
 };
 
-export default connect(mapStateToProps, { getHabits, addPoint, removePoint })(
-  MainTable
-);
+export default connect(mapStateToProps, {
+  getHabits,
+  addPoint,
+  removePoint,
+  removeHabit
+})(MainTable);
