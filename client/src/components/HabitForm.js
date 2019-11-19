@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { createHabit } from "../../src/redux/actions";
+import { createHabit } from "../redux/actions";
 
-const TempHabitForm = ({ createHabit }) => {
+const HabitForm = ({ createHabit }) => {
   const [formData, setFormData] = useState({
     name: ""
   });
@@ -39,4 +39,4 @@ const TempHabitForm = ({ createHabit }) => {
   );
 };
 
-export default connect(null, { createHabit })(TempHabitForm);
+export default connect(null, { createHabit })(HabitForm);

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const MainTableStyles = styled.table`
   /* width: 95%; */
@@ -16,6 +16,12 @@ const MainTableStyles = styled.table`
     border: dotted 1px #000000;
     background-color: transparent;
     word-wrap: none;
+  }
+
+  .point {
+    min-width: 32px;
+    height: 32px;
+    border: dotted 1px #000000;
   }
 
   td.habit {

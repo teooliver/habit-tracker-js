@@ -8,7 +8,8 @@ import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import rootReducer from "./redux/reducers";
-import TempHabitForm from "./components/TempHabitForm";
+import HabitForm from "./components/HabitForm";
+import SelectMonth from "./components/SelectMonth";
 
 const initialState = {};
 
@@ -25,8 +26,8 @@ const App = () => {
     <Provider store={store}>
       <div className="App">
         <h1>Habit Tracker</h1>
-        <h2>Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</h2>
-        <TempHabitForm />
+        <SelectMonth />
+        <HabitForm />
         <MainTable />
       </div>
     </Provider>

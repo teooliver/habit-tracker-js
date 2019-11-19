@@ -1,40 +1,22 @@
 import React, { useEffect } from "react";
 import MainTableStyles from "./styledComponents/MainTableStyles";
-import { oddMonth } from "../utils/constants";
 import { connect } from "react-redux";
-import {
-  getHabits,
-  addPoint,
-  removePoint,
-  removeHabit
-} from "../redux/actions/index";
+import { getHabits, removeHabit } from "../redux/actions/index";
+import Habit from "./Habit";
 
-const MainTable = ({ habits, ...props }) => {
+const MainTable = ({ habits, selectedMonth, ...props }) => {
   useEffect(() => {
     props.getHabits();
   }, []);
 
-  // ###### SANDBOX #######
-  // const filtered = habits.map(habit =>
-  //   habit.events.filter(evt => evt._id !== "11")
-  // );
-  // console.log("Filtered: ", filtered);
+  const daysOnSelectedMonth = new Date(2019, selectedMonth, 0).getDate() + 1;
 
-  // ###### SANDBOX #######
-
-  // const handleDone = (habit, event, day) => {
-  //   // console.log(habit._id, event, day);
-  //   if (event.day === day) {
-  //     return (
-  //       <i
-  //         onClick={() => props.removePoint(event.id)}
-  //         className="fas fa-circle"
-  //         style={{ color: " blueviolet" }}
-  //       ></i>
-  //     );
-  //   }
-  //   return <div onClick={() => console.log("clicked the div")}></div>;
-  // };
+  let daysArray = [];
+  const renderTableHeader = daysOnSelectedMonth => {
+    for (let i = 1; i < daysOnSelectedMonth; i++) {
+      daysArray.push(`${i}`);
+    }
+  };
 
   return (
     <>
@@ -42,53 +24,31 @@ const MainTable = ({ habits, ...props }) => {
         <thead>
           <tr>
             <th></th>
-            {oddMonth.map(day => (
+            {renderTableHeader(daysOnSelectedMonth)}
+            {daysArray.map(day => (
               <th key={day}>{day}</th>
             ))}
           </tr>
         </thead>
 
         <tbody>
-          {habits.map(habit => {
-            return (
-              <>
-                <tr key={habit._id}>
-                  <td
-                    className="habit"
-                    onClick={() => props.removeHabit(habit._id)}
-                  >
-                    <i
-                      className="fas fa-circle"
-                      style={{ color: " blueviolet" }}
-                    ></i>
-                    {habit.name}
-                  </td>
-                  {oddMonth.map(day => (
-                    <td key={day} className="color">
-                      {habit.events.map(evt => {
-                        return handleDone(habit, evt, day);
-                      })}
-                    </td>
-                  ))}
-                </tr>
-              </>
-            );
-          })}
+          {habits.map((habit, index) => (
+            <Habit habit={habit} index={index} daysArray={daysArray} />
+          ))}
         </tbody>
       </MainTableStyles>
     </>
   );
 };
 
-const mapStateToProps = ({ habits }) => {
+const mapStateToProps = ({ habits, selectedMonth }) => {
   return {
-    habits
+    habits,
+    selectedMonth
   };
 };
 
 export default connect(mapStateToProps, {
   getHabits,
-  addPoint,
-  removePoint,
   removeHabit
 })(MainTable);

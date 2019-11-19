@@ -43,22 +43,24 @@ export const removeHabit = id => async dispatch => {
 };
 
 export const addPoint = (id, date) => async dispatch => {
-  console.log("From addPoint");
+  const intDate = parseInt(date);
+  console.log("From addPoint: ", id);
+
   const config = {
     "Content-Type": "application/json"
   };
-  const res = await axios.post(`api/habits/${id}`, date, config);
+  const res = await axios.post(`api/habits/${id}`, { date: intDate }, config);
   dispatch({
     type: ADD_POINT,
     payload: res.data
   });
 };
 
-export const removePoint = id => async dispatch => {
+export const removePoint = (id, eventId) => async dispatch => {
   const config = {
     "Content-Type": "application/json"
   };
-  const res = await axios.post("http://localhost:3001/habits", id, config);
+  const res = await axios.delete(`api/habits/${id}/${eventId}`, config);
 
   dispatch({
     type: REMOVE_POINT,

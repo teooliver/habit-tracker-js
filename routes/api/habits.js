@@ -65,25 +65,54 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// @route     POST api/habit/:id/date
+// @route     POST api/habit/:id/
 // @desc      Add Point item
 // @access    Public
 router.post("/:id/", async (req, res) => {
   try {
     const date = req.body.date;
 
-    let habit = await Habit.findOneAndUpdate({
-      _id: req.params.id,
-      // needs to be unique?
-      // "events.date": {
-      //   $ne: date
-      // },
-      $addToSet: {
-        events: {
-          date
+    const habit = await Habit.findOneAndUpdate(
+      {
+        _id: req.params.id,
+        "events.date": {
+          $ne: date
         }
-      }
-    });
+      },
+      {
+        $addToSet: {
+          events: {
+            date
+          }
+        }
+      },
+      { new: true }
+    );
+
+    res.json(habit);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// @route     DELETE api/habit/:id/
+// @desc      Add Point item
+// @access    Public
+router.delete("/:id/:eventId", async (req, res) => {
+  try {
+    const habit = await Habit.findOneAndUpdate(
+      {
+        _id: req.params.id
+      },
+      {
+        $pull: {
+          events: {
+            _id: req.params.eventId
+          }
+        }
+      },
+      { new: true }
+    );
 
     res.json(habit);
   } catch (error) {
