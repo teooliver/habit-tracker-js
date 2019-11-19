@@ -13,6 +13,10 @@ const SelectMonthStyles = styled.div`
       border-bottom: 1px solid black;
     }
   }
+
+  .active {
+    border-bottom: 1px solid black;
+  }
 `;
 
 export default SelectMonthStyles;

@@ -5,93 +5,58 @@ import { selectMonth } from "../../src/redux/actions/monthSelect";
 
 const SelectMonth = ({ selectMonth, selectedMonth }) => {
   // use selectedMonth to make active className
+  console.log(selectedMonth);
+  const monthsArray = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+
+  // const test = () => {
+  //   monthsArray.map((month, index) => {
+  //     console.log(month);
+  //     if (selectedMonth === index) {
+  //       console.log("Hello");
+  //     }
+  //   });
+  // };
+
+  // test();
 
   return (
     <SelectMonthStyles>
-      <button
-        onClick={() => {
-          selectMonth(1);
-        }}
-      >
-        Jan
-      </button>
-      <button
-        onClick={() => {
-          selectMonth(2);
-        }}
-      >
-        Feb
-      </button>
-      <button
-        onClick={() => {
-          selectMonth(3);
-        }}
-      >
-        Mar
-      </button>
-      <button
-        onClick={() => {
-          selectMonth(4);
-        }}
-      >
-        Apr
-      </button>
-      <button
-        onClick={() => {
-          selectMonth(5);
-        }}
-      >
-        May
-      </button>
-      <button
-        onClick={() => {
-          selectMonth(6);
-        }}
-      >
-        Jun
-      </button>
-      <button
-        onClick={() => {
-          selectMonth(7);
-        }}
-      >
-        Jul
-      </button>
-      <button
-        onClick={() => {
-          selectMonth(8);
-        }}
-      >
-        Aug
-      </button>
-      <button
-        onClick={() => {
-          selectMonth(9);
-        }}
-      >
-        Sept
-      </button>
-      <button
-        onClick={() => {
-          selectMonth(10);
-        }}
-      >
-        Oct
-      </button>
-      <button
-        onClick={() => {
-          selectMonth(11);
-        }}
-      >
-        Nov
-      </button>
-      <button
-        onClick={() => {
-          selectMonth(12);
-        }}
-      >
-        Dec
-      </button>
+      {monthsArray.map((month, index) => {
+        if (selectedMonth === index) {
+          return (
+            <button
+              className="active"
+              onClick={() => {
+                selectMonth(index);
+              }}
+            >
+              {month}
+            </button>
+          );
+        }
+        return (
+          <button
+            onClick={() => {
+              selectMonth(index);
+            }}
+          >
+            {month}
+          </button>
+        );
+      })}
     </SelectMonthStyles>
   );
 };

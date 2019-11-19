@@ -9,7 +9,8 @@ const MainTable = ({ habits, selectedMonth, ...props }) => {
     props.getHabits();
   }, []);
 
-  const daysOnSelectedMonth = new Date(2019, selectedMonth, 0).getDate() + 1;
+  const daysOnSelectedMonth =
+    new Date(2019, selectedMonth + 1, 0).getDate() + 1;
 
   let daysArray = [];
   const renderTableHeader = daysOnSelectedMonth => {

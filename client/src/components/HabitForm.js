@@ -12,7 +12,6 @@ const HabitForm = ({ createHabit }) => {
   };
 
   const handleSubmit = e => {
-    console.log(formData);
     e.preventDefault();
 
     createHabit(formData);

@@ -12,10 +12,17 @@ export const HabitEvent = ({
   selectedMonth
 }) => {
   const date = new Date(2019, selectedMonth, day);
-  console.log("DATE: ", date);
 
   const foundDate = events.find(event => {
-    return event.date === parseInt(day);
+    const eventDate = new Date(event.date);
+    if (
+      eventDate.getDate() === date.getDate() &&
+      eventDate.getMonth() === date.getMonth()
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   });
 
   return (
@@ -28,7 +35,7 @@ export const HabitEvent = ({
           <i className="fas fa-circle" style={{ color: color }}></i>
         </td>
       ) : (
-        <td className="point" onClick={() => addPoint(habitId, day)}></td>
+        <td className="point" onClick={() => addPoint(habitId, date)}></td>
       )}
     </>
   );

@@ -25,8 +25,6 @@ export const createHabit = formData => async dispatch => {
 
   const res = await axios.post("/api/habits/", formData, config);
 
-  console.log(res.data);
-
   dispatch({
     type: CREATE_HABIT,
     payload: res.data
@@ -43,13 +41,10 @@ export const removeHabit = id => async dispatch => {
 };
 
 export const addPoint = (id, date) => async dispatch => {
-  const intDate = parseInt(date);
-  console.log("From addPoint: ", id);
-
   const config = {
     "Content-Type": "application/json"
   };
-  const res = await axios.post(`api/habits/${id}`, { date: intDate }, config);
+  const res = await axios.post(`api/habits/${id}`, { date: date }, config);
   dispatch({
     type: ADD_POINT,
     payload: res.data

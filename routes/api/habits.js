@@ -66,7 +66,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 // @route     POST api/habit/:id/
-// @desc      Add Point item
+// @desc      Add Event Point
 // @access    Public
 router.post("/:id/", async (req, res) => {
   try {
@@ -96,7 +96,7 @@ router.post("/:id/", async (req, res) => {
 });
 
 // @route     DELETE api/habit/:id/
-// @desc      Add Point item
+// @desc      Remove Event Point
 // @access    Public
 router.delete("/:id/:eventId", async (req, res) => {
   try {

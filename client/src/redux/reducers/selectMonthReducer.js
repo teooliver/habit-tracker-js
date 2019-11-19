@@ -1,7 +1,7 @@
 import { SELECT_MONTH } from "../actions/types";
 
 const currentMonth = new Date();
-const initialState = currentMonth.getMonth() + 1;
+const initialState = currentMonth.getMonth();
 
 const selectMonthReducer = (state = initialState, action) => {
   switch (action.type) {

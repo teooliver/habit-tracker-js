@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const EventsSchema = new Schema({
   date: {
-    type: Number,
+    type: Date,
     required: true
     // unique: true
   }
