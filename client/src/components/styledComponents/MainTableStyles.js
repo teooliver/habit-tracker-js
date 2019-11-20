@@ -30,6 +30,10 @@ const MainTableStyles = styled.table`
     }
   }
 
+  img {
+    padding-top: 1rem;
+    margin-left: 30%;
+  }
   /* i {
     color: blueviolet;
   } */
