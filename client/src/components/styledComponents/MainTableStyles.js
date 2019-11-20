@@ -1,42 +1,33 @@
 import styled from "styled-components";
 
 const MainTableStyles = styled.table`
-  /* width: 95%; */
   margin-left: 3rem;
   border-collapse: collapse;
-  th {
-  }
-  td:hover {
-    background-color: lightgray;
+
+  .habit {
+    display: flex;
   }
 
-  .color {
+  td.event {
     min-width: 32px;
-    height: 32px;
+    max-width: 32px;
+    max-height: 32px;
     border: dotted 1px #000000;
-    background-color: transparent;
-    word-wrap: none;
-  }
-
-  .point {
-    min-width: 32px;
-    height: 32px;
-    border: dotted 1px #000000;
-  }
-
-  td.habit {
-    i {
-      margin-right: 10px;
+    &:hover {
+      background-color: lightgray;
     }
   }
 
-  img {
-    padding-top: 1rem;
-    margin-left: 30%;
+  td.habit {
+    align-items: center;
+    padding: 0 0.3rem;
+    &:hover {
+      background-color: lightgray;
+    }
+    i {
+      margin-right: 0.3rem;
+    }
   }
-  /* i {
-    color: blueviolet;
-  } */
 `;
 
 export default MainTableStyles;

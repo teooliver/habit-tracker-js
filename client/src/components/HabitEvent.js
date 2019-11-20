@@ -29,13 +29,13 @@ export const HabitEvent = ({
     <>
       {foundDate ? (
         <td
-          className="point"
+          className="event"
           onClick={() => removePoint(habitId, foundDate._id)}
         >
           <i className="fas fa-circle" style={{ color: color }}></i>
         </td>
       ) : (
-        <td className="point" onClick={() => addPoint(habitId, date)}></td>
+        <td className="event" onClick={() => addPoint(habitId, date)}></td>
       )}
     </>
   );

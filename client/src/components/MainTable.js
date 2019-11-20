@@ -23,9 +23,9 @@ const MainTable = ({ habits, selectedMonth, ...props }) => {
   const checkHabits = habits.length !== 0;
 
   return (
-    <MainTableStyles>
+    <>
       {checkHabits ? (
-        <>
+        <MainTableStyles>
           <thead>
             <tr>
               <th></th>
@@ -41,11 +41,13 @@ const MainTable = ({ habits, selectedMonth, ...props }) => {
               <Habit habit={habit} index={index} daysArray={daysArray} />
             ))}
           </tbody>
-        </>
+        </MainTableStyles>
       ) : (
-        <img src={tree_swing} alt="" />
+        <div className="center">
+          <img src={tree_swing} alt="" />
+        </div>
       )}
-    </MainTableStyles>
+    </>
   );
 };
 

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const SelectMonthStyles = styled.div`
   margin: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   button {
     padding: 0.2rem 0.5rem;
     border: 0;

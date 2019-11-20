@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { createHabit } from "../redux/actions";
+import HabitFormStyles from "./styledComponents/HabitFormStyles";
 
 const HabitForm = ({ createHabit }) => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const HabitForm = ({ createHabit }) => {
   const { name } = formData;
 
   return (
-    <div>
+    <HabitFormStyles>
       <form action="" onSubmit={e => handleSubmit(e)}>
         <label htmlFor="name">Create New Habit</label>
         <input
@@ -34,7 +35,7 @@ const HabitForm = ({ createHabit }) => {
           onChange={e => onChange(e)}
         />
       </form>
-    </div>
+    </HabitFormStyles>
   );
 };
 
