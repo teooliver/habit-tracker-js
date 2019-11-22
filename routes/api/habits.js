@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const auth = require("../../middleware/auth");
 const Habit = require("../../models/Habit");
 
 // @route     Get api/habits
 // @desc      Get all habits
-// @access    Public
+// @access    Private
 router.get("/", async (req, res) => {
   try {
     const habits = await Habit.find();
