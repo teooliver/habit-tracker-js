@@ -6,9 +6,9 @@ const Habit = require("../../models/Habit");
 // @route     Get api/habits
 // @desc      Get all habits
 // @access    Private
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
-    const habits = await Habit.find();
+    const habits = await Habit.find({ user: req.user.id });
 
     if (habits.length === 0) {
       return res.status(404).json({ msg: "No habits found" });
@@ -23,18 +23,20 @@ router.get("/", async (req, res) => {
 
 // @route     POST api/habits
 // @desc      Create habit
-// @access    Public
-router.post("/", async (req, res) => {
+// @access    Private
+router.post("/", auth, async (req, res) => {
   const { name } = req.body;
-  console.log("FROM SERVER", name);
+
   try {
     let habit = await Habit.findOne({ name });
+
     if (habit) {
       return res.status(400).json({
         errors: "Habit already logged"
       });
     }
     habit = new Habit({
+      user: req.user.id,
       name
     });
 
@@ -46,22 +48,26 @@ router.post("/", async (req, res) => {
   }
 });
 
-// @route     DELETE api/habit/:id
+// @route     DELETE api/habits/:id
 // @desc      Delete habit
-// @access    Public
-router.delete("/:id", async (req, res) => {
+// @access    Private
+router.delete("/:id", auth, async (req, res) => {
   try {
     const habit = await Habit.findById(req.params.id);
 
     if (!habit) {
       return res.status(404).json({ msg: "Item not found" });
     }
+    // Check user
+    if (habit.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "User not authorized" });
+    }
+
     await habit.remove();
     res.json(habit);
   } catch (error) {
-    console.error(error.message);
     if (error.kind === "ObjectId") {
-      return res.status(400).json({ msg: "Item not found" });
+      return res.status(400).json({ msg: "Habit not found" });
     }
   }
 });
@@ -71,7 +77,7 @@ router.delete("/:id", async (req, res) => {
 // @access    Public
 router.post("/:id/", async (req, res) => {
   try {
-    const date = req.body.date;
+    const { date } = req.body;
 
     const habit = await Habit.findOneAndUpdate(
       {
@@ -96,7 +102,7 @@ router.post("/:id/", async (req, res) => {
   }
 });
 
-// @route     DELETE api/habit/:id/
+// @route     DELETE api/habit/:id/:eventId
 // @desc      Remove Event Point
 // @access    Public
 router.delete("/:id/:eventId", async (req, res) => {

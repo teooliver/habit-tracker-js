@@ -27,6 +27,24 @@ router.get("/", async (req, res) => {
   }
 });
 
+//// @route     Get api/users
+//// @desc      Get user
+//// @access    Private
+// router.get("/", async (req, res) => {
+//   try {
+//     const users = await User.find();
+
+//     if (users.length === 0) {
+//       return res.status(404).json({ msg: "No users found" });
+//     }
+
+//     res.json(users);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send("Server Error");
+//   }
+// });
+
 // @route     POST api/users
 // @desc      Create user
 // @access    Public
