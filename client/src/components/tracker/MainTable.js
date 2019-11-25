@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import MainTableStyles from "./styledComponents/MainTableStyles";
+import MainTableStyles from "../styledComponents/MainTableStyles";
 import { connect } from "react-redux";
-import { getHabits, removeHabit } from "../redux/actions/index";
+import { getHabits, removeHabit } from "../../redux/actions";
 import Habit from "./Habit";
-import tree_swing from "../images/undraw_Tree_swing_646s.svg";
+import tree_swing from "../../images/undraw_Tree_swing_646s.svg";
 
 const MainTable = ({ habits, selectedMonth, ...props }) => {
   useEffect(() => {

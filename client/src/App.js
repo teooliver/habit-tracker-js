@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import MainTable from "./components/MainTable";
-import Landing from "./components/Landing";
+import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
-import HabitForm from "./components/HabitForm";
-import SelectMonth from "./components/SelectMonth";
-import Alert from "./components/Alert";
+import Alert from "./components/layout/Alert";
 import { loadUser } from "./redux/actions/auth";
 import setAuthToken from "./utils/setAuthToken";
 //Redux
@@ -16,6 +13,8 @@ import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import rootReducer from "./redux/reducers";
+import Navbar from "./components/layout/Navbar";
+import HabitTracker from "./components/tracker/HabitTracker";
 
 const initialState = {};
 
@@ -40,14 +39,12 @@ const App = () => {
     <Provider store={store}>
       <div className="App">
         <Router>
+          <Navbar />
           <Route exact path="/" component={Landing} />
           <Alert />
           <Switch>
             <Route exact path="/track">
-              <h1>Habit Tracker</h1>
-              <SelectMonth />
-              <HabitForm />
-              <MainTable />
+              <HabitTracker />
             </Route>
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />

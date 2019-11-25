@@ -1,11 +1,9 @@
 import React from "react";
-import SelectMonthStyles from "./styledComponents/SelectMonthStyles";
+import SelectMonthStyles from "../styledComponents/SelectMonthStyles";
 import { connect } from "react-redux";
-import { selectMonth } from "../../src/redux/actions/monthSelect";
+import { selectMonth } from "../../redux/actions/monthSelect";
 
 const SelectMonth = ({ selectMonth, selectedMonth }) => {
-  // use selectedMonth to make active className
-  console.log(selectedMonth);
   const monthsArray = [
     "Jan",
     "Feb",
@@ -20,17 +18,6 @@ const SelectMonth = ({ selectMonth, selectedMonth }) => {
     "Nov",
     "Dec"
   ];
-
-  // const test = () => {
-  //   monthsArray.map((month, index) => {
-  //     console.log(month);
-  //     if (selectedMonth === index) {
-  //       console.log("Hello");
-  //     }
-  //   });
-  // };
-
-  // test();
 
   return (
     <SelectMonthStyles>

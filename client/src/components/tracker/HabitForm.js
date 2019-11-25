@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { createHabit } from "../redux/actions";
-import HabitFormStyles from "./styledComponents/HabitFormStyles";
+import { createHabit } from "../../redux/actions";
+import HabitFormStyles from "../styledComponents/HabitFormStyles";
 
 const HabitForm = ({ createHabit }) => {
   const [formData, setFormData] = useState({

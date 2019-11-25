@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addPoint, removePoint } from "../redux/actions/index";
+import { addPoint, removePoint } from "../../redux/actions/index";
 
 export const HabitEvent = ({
   events,

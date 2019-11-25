@@ -1,7 +1,7 @@
 import React from "react";
 import HabitEvent from "./HabitEvent";
 import { connect } from "react-redux";
-import { removeHabit } from "../redux/actions/index";
+import { removeHabit } from "../../redux/actions/index";
 
 const colors = [
   "#4c4e58",
