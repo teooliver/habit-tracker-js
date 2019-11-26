@@ -10,10 +10,10 @@ const User = require("../../models/User");
 
 // @route     Get api/auth
 // @desc      Auth
-// @access    Public
+// @access    Private
 router.get("/", auth, async (req, res) => {
   try {
-    const user = await await User.findById(req.user.id).select("-password");
+    const user = await User.findById(req.user.id).select("-password");
     res.json(user);
   } catch (error) {
     console.log(error);
