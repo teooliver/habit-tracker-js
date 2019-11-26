@@ -3,6 +3,7 @@ import RegisterStyles from "../styledComponents/RegisterStyles";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { login } from "../../redux/actions/auth";
+import LoginStyles from "../styledComponents/LoginStyles";
 
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -29,11 +30,11 @@ const Login = ({ login, isAuthenticated }) => {
   }
 
   return (
-    <RegisterStyles>
+    <LoginStyles>
       <div className="card">
         <h1>Log In</h1>
         <p>
-          <i className="fas fa-user"></i> Create Your Account
+          <i className="fas fa-user"></i> Sign Into Your Account
         </p>
         <form onSubmit={e => onSubmit(e)}>
           <input
@@ -59,7 +60,7 @@ const Login = ({ login, isAuthenticated }) => {
           Don't have an account? <Link to="/register">Sign Up</Link>
         </p>
       </div>
-    </RegisterStyles>
+    </LoginStyles>
   );
 };
 

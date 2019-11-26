@@ -5,11 +5,10 @@ import { logout } from "../../redux/actions/auth";
 import NavbarStyles from "../styledComponents/NavbarStyles";
 
 const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
-  console.log(user);
   const authLinks = (
     <ul>
       <li>
-        <a onClick={logout} href="#!">
+        <a className="link" onClick={logout} href="#!">
           <i className="fas fa-sign-out-alt"></i>
           <span className="hide-sm">Logout</span>
         </a>
@@ -20,18 +19,27 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   const guestLinks = (
     <ul>
       <li>
-        <Link to="/register">Register</Link>
+        <Link className="link" to="/register">
+          Register
+        </Link>
       </li>
       <li>
-        <Link to="/login">Login</Link>
+        <Link className="link" to="/login">
+          Login
+        </Link>
       </li>
     </ul>
   );
 
   return (
     <NavbarStyles>
-      {!loading && <> {isAuthenticated ? authLinks : guestLinks} </>}
-      {user && <img src={user.avatar} alt="" />}
+      <div className="spacer"></div>
+      <h1>Habit Tracker</h1>
+      <nav>
+        {!loading && <> {isAuthenticated ? authLinks : null} </>}
+
+        {user && isAuthenticated && <img src={user.avatar} alt="avatar" />}
+      </nav>
     </NavbarStyles>
   );
 };

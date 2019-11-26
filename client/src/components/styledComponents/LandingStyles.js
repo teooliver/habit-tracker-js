@@ -14,7 +14,7 @@ const LandingStyles = styled.section`
     height: auto;
     width: 100%;
   }
-  .card {
+  /* .card {
     height: 100%;
     align-self: start;
     border: 1px solid #3f3c57;
@@ -27,7 +27,7 @@ const LandingStyles = styled.section`
       margin: 0.5rem;
       padding: 0.2rem;
     }
-  }
+  } */
 `;
 
 export default LandingStyles;

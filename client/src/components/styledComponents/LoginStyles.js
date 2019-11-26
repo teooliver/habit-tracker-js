@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
-const RegisterStyles = styled.div`
+const LoginStyles = styled.div`
   /* change background color */
-  position: absolute;
+  /* position: absolute;
   width: 100%;
-  /* height: 100%; */
-  margin-top: 3rem;
+  height: 100%; */
   display: grid;
 
   justify-items: center;
@@ -22,4 +21,4 @@ const RegisterStyles = styled.div`
   }
 `;
 
-export default RegisterStyles;
+export default LoginStyles;
