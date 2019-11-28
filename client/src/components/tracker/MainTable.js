@@ -26,21 +26,23 @@ const MainTable = ({ habits, selectedMonth, ...props }) => {
     <>
       {checkHabits ? (
         <MainTableStyles>
-          <thead>
-            <tr>
-              <th></th>
-              {renderTableHeader(daysOnSelectedMonth)}
-              {daysArray.map(day => (
-                <th key={day}>{day}</th>
-              ))}
-            </tr>
-          </thead>
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                {renderTableHeader(daysOnSelectedMonth)}
+                {daysArray.map(day => (
+                  <th key={day}>{day}</th>
+                ))}
+              </tr>
+            </thead>
 
-          <tbody>
-            {habits.map((habit, index) => (
-              <Habit habit={habit} index={index} daysArray={daysArray} />
-            ))}
-          </tbody>
+            <tbody>
+              {habits.map((habit, index) => (
+                <Habit habit={habit} index={index} daysArray={daysArray} />
+              ))}
+            </tbody>
+          </table>
         </MainTableStyles>
       ) : (
         <div className="center">

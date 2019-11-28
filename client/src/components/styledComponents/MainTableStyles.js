@@ -1,8 +1,11 @@
 import styled from "styled-components";
 
-const MainTableStyles = styled.table`
-  margin-left: 3rem;
-  border-collapse: collapse;
+const MainTableStyles = styled.div`
+  table {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   .habit {
     display: flex;
@@ -20,6 +23,7 @@ const MainTableStyles = styled.table`
 
   td.habit {
     align-items: center;
+    white-space: nowrap;
     padding: 0 0.3rem;
     &:hover {
       background-color: lightgray;
